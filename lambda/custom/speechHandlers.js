@@ -26,14 +26,18 @@ const speechHandlers = {
       this.emit(":responseReady");
     });
   },
-  sCountWordOccurences: function() {
-    const message = "Das wort Amine wurde nur ein mal gennant";
+  sCountWordOccurences: function(count) {
+    const message = "Das wort Mannheim wurde " + count + " mal gennant";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },
-  sGetPaperSavings: function() {
+  sGetPaperSavings: function(papers, trees) {
     const message =
-      "Du hast mit Mannheimer Morgen skill 2 kilometer papier gespart. Sehr gut!";
+      "Du hast mit Mannheimer Morgen skill " +
+      papers +
+      " A4 papiere gespart. das heißt, du hast " +
+      trees +
+      " Bäume geretet. Sehr gut!";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },

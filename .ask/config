@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-mannheim-default",
             "handler": "index.handler",
-            "revisionId": "3f765538-ad59-4cd3-b5b1-d1abc115cce7",
+            "revisionId": "32063628-bab2-40f2-ad5e-8a228facd4a8",
             "runtime": "nodejs8.10"
           }
         ]

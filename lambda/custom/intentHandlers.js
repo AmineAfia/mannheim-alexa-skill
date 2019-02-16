@@ -5,16 +5,59 @@ const feedHelper = require("./feedHelper");
 const logHelper = require("./logHelper");
 const s3Helper = require("./s3Helper");
 const sendEmail = require("./node-mailer");
-// const jsn = require("./feeds.json");
+const jsn = require("./feeds.json");
+const aws = require("aws-sdk");
+const s3 = new aws.S3(); // Pass in opts to S3 if necessary
+aws.config.update({ region: "us-east-1" });
 
+const s3Params = {
+  Bucket: "mhack3",
+  Key: "feeds.json"
+};
 let items = [];
 
 let intentHandlers = {
-  getWordOccurences: function() {
-    this.emit("sCountWordOccurences");
+  getWordOccurences: function(searchWord) {
+    s3.getObject(
+      s3Params,
+      function(err, data) {
+        if (err) console.log(err, err.stack);
+        // an error occurred
+        else {
+          let articles = data.Body.toString("utf-8");
+          let counts = articles
+            .replace(/[^\w\s]/g, "")
+            .split(/\s+/)
+            .reduce(function(map, word) {
+              map[word] = (map[word] || 0) + 1;
+              return map;
+            }, Object.create(null));
+          console.log("------------------");
+          console.log(counts[searchWord]); // successful response
+          console.log("------------------");
+          this.emit("sCountWordOccurences", counts[searchWord]);
+        }
+      }.bind(this)
+    );
   },
   getPaperSavings: function() {
-    this.emit("sGetPaperSavings");
+    s3.getObject(
+      s3Params,
+      function(err, data) {
+        if (err) console.log(err, err.stack);
+        // an error occurred
+        else {
+          let articles = data.Body.toString("utf-8");
+          let wordsCounts = articles.split(" ").length;
+          let pages = wordsCounts / 500;
+          let trees = pages / 12144;
+          console.log("------------------");
+          console.log(wordsCounts); // successful response
+          console.log("------------------");
+          this.emit("sGetPaperSavings", pages, trees);
+        }
+      }.bind(this)
+    );
   },
   sendDigest: async function() {
     await sendEmail();
