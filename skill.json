@@ -1,0 +1,31 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "de-DE": {
+          "summary": "Mannheim eine Skill von Mennheimer Morgen",
+          "examplePhrases": [
+            "Alexa starte Mannheim",
+            "Alexa frag mannheim meine favoriten zu spielen",
+            "Alexa holl meine categorien von mannheim"
+          ],
+          "name": "mannheim",
+          "description": "Coolste hack for Mannheimer morgen"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-custom-mannheim-default"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
