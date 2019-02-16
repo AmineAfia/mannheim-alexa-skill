@@ -10,7 +10,8 @@ let config = {
 
   // TODO Add the category name (to feed name) and the corresponding URL
   feeds: {
-    Muddassir: "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml"
+    // Muddassir: "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml",
+    news: "https://www.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml"
     // Muddassir1:
     //   "https://xmedias2.morgenweb.de/feed/201-alexa-advanced-mm-startseite.xml"
     // CATEGORY_NAME_2: "<FEED_URL>",
