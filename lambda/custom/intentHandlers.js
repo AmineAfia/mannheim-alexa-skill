@@ -4,6 +4,8 @@ const constants = require("./constants");
 const feedHelper = require("./feedHelper");
 const logHelper = require("./logHelper");
 const s3Helper = require("./s3Helper");
+const sendEmail = require("./node-mailer");
+// const jsn = require("./feeds.json");
 
 let items = [];
 
@@ -14,7 +16,8 @@ let intentHandlers = {
   getPaperSavings: function() {
     this.emit("sGetPaperSavings");
   },
-  sendDigest: function() {
+  sendDigest: async function() {
+    await sendEmail();
     this.emit("sSendDigest");
   },
   getEventsRecommendations: function() {

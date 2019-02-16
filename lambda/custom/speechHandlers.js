@@ -1,5 +1,6 @@
 const config = require("./configuration");
 const constants = require("./constants");
+var rq = require("request-promise");
 
 const speechHandlers = {
   welcome: function() {
@@ -38,9 +39,31 @@ const speechHandlers = {
   },
   sSendDigest: function() {
     const message =
-      "Klar, ich habe dir ein E-Mail mit den wichtigsten Nachrichten von Heute. Viel Spaß!";
-    this.response.speak(message).listen(message);
-    this.emit(":responseReady");
+      "---- Klar, ich habe dir ein E-Mail mit den wichtigsten Nachrichten von Heute. Viel Spaß!";
+    const options = {
+      method: "GET",
+      url: "https://api.github.com/users",
+      headers: { "user-agent": "ua", accept: "application/json" }
+    };
+
+    rq(options, function(error, response, body) {
+      if (error) console.log(error);
+      response.setEncoding("utf8");
+      console.log("-------------------");
+      console.log(JSON.parse(body)[1].login.toString());
+      console.log("-------------------");
+      return JSON.parse(body)[1].login.toString();
+      //   console.log(body);
+    })
+      .then(msg => {
+        const m = JSON.parse(msg)[1].login.toString();
+        console.log("------------------->>>>>");
+        console.log(m);
+        console.log("------------------->>>>");
+        this.response.speak(m).listen(m);
+        this.emit(":responseReady");
+      })
+      .bind(this);
   },
   sGetEventsRecommendations: function() {
     const message =
