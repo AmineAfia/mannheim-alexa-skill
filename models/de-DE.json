@@ -4,7 +4,7 @@
       "invocationName": "mannheim",
       "intents": [
         {
-          "name": "getWordOccurences",
+          "name": "GetWordOccurences",
           "samples": [
             "amine",
             "wie viel mals wurde amine in Nachrichten genannt"
@@ -12,18 +12,18 @@
           "slots": []
         },
         {
-          "name": "getPaperSavings",
+          "name": "GetPaperSavings",
           "samples": ["sparen", "Wie viel papier habe ich gespart"],
           "slots": []
         },
         {
-          "name": "sendDigest",
+          "name": "SendDigest",
           "samples": ["email", "Kannst du mir my digest schicken"],
           "slots": []
         },
         {
-          "name": "getEventsRecommendations",
-          "samples": ["events", "Was passiert is mannheim nächste wochenende"],
+          "name": "GetEventsRecommendations",
+          "samples": ["evt", "Was passiert is mannheim nächste wochenende"],
           "slots": []
         },
         {

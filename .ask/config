@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "de-DE": {
-            "eTag": "a617c01833c4eebc43cdb27f00db8f4a"
+            "eTag": "1d1f0983642c675410c9bd890b36ad1e"
           }
         },
         "lambda": [
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-mannheim-default",
             "handler": "index.handler",
-            "revisionId": "42bf9a1e-c86f-4bbd-bdd3-7e96e3f25792",
+            "revisionId": "1583afbf-f75c-430c-80ee-97fd2cf514b2",
             "runtime": "nodejs8.10"
           }
         ]

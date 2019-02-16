@@ -42,7 +42,7 @@ const speechHandlers = {
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },
-  sgetEventsRecommendations: function() {
+  sGetEventsRecommendations: function() {
     const message =
       "Nächste Wochenende die beste events in Mannheim sind: Harry Potter in cinemax, Hackdays in Mafinex und die beste Techno Konzert im Hafen49";
     this.response.speak(message).listen(message);

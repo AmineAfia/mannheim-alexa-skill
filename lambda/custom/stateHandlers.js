@@ -216,16 +216,16 @@ const stateHandlers = {
         // Calling speechHandler
         this.emit("unhandledFeedMode");
       },
-      getWordOccurences: function() {
+      GetWordOccurences: function() {
         this.emit("getWordOccurences");
       },
-      getPaperSavings: function() {
+      GetPaperSavings: function() {
         this.emit("getPaperSavings");
       },
-      sendDigest: function() {
+      SendDigest: function() {
         this.emit("sendDigest");
       },
-      getEventsRecommendations: function() {
+      GetEventsRecommendations: function() {
         this.emit("getEventsRecommendations");
       }
     }
@@ -268,16 +268,16 @@ const stateHandlers = {
       Unhandled: function() {
         this.emit("unhandledSingleFeedMode");
       },
-      getWordOccurences: function() {
+      GetWordOccurences: function() {
         this.emit("getWordOccurences");
       },
-      getPaperSavings: function() {
+      GetPaperSavings: function() {
         this.emit("getPaperSavings");
       },
-      sendDigest: function() {
+      SendDigest: function() {
         this.emit("sendDigest");
       },
-      getEventsRecommendations: function() {
+      GetEventsRecommendations: function() {
         this.emit("getEventsRecommendations");
       }
     }
