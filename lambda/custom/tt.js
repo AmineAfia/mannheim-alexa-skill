@@ -22,6 +22,8 @@ s3.getObject(params, function(err, data) {
         map[word] = (map[word] || 0) + 1;
         return map;
       }, Object.create(null));
-    console.log(counts["Mannheim"]); // successful response
+      let c = counts["mmnhji"];
+    if (c === undefined) c = 0;
+    console.log(c); // successful response
   }
 });

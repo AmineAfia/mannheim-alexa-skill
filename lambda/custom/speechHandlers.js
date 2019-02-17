@@ -9,11 +9,10 @@ const speechHandlers = {
       config.welcome_message +
       constants.breakTime["100"] +
       " Du kannst ein der volgende feeds auswählen : ";
-    let reprompt = "You can ask for any of the following feeds : ";
+    let reprompt = "Du kannst ein diese feeds auswählen : ";
     let cardTitle = config.welcome_message;
     let cardContent =
-      config.welcome_message +
-      " You can select any of the following feeds : \n";
+      config.welcome_message + "Du kannst ein diese feeds auswählen :  \n";
     // Call category helper to get list of all categories
     categoryHelper((categoryList, cardCategoryList) => {
       message += categoryList;
@@ -26,8 +25,19 @@ const speechHandlers = {
       this.emit(":responseReady");
     });
   },
+  sReadStoredFeed: function(articles) {
+    let message = "Hier sind die letzte " + articles.length + " Artikel. ";
+    articles.forEach((e, i) => {
+      let tmp = i + 1;
+      message +=
+        " Artikel " + tmp + " : " + e.title + ". \n" + e.description + ". ";
+    });
+    this.response.speak(message).listen(message);
+    this.emit(":responseReady");
+  },
   sCountWordOccurences: function(count) {
-    const message = "Das wort Mannheim wurde " + count + " mal gennant";
+    if (count === undefined) count = 0;
+    const message = "Der Begriff Mannheimer Morgen wurde " + count + " mal in Nachrichten gennant";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },
@@ -43,31 +53,33 @@ const speechHandlers = {
   },
   sSendDigest: function() {
     const message =
-      "---- Klar, ich habe dir ein E-Mail mit den wichtigsten Nachrichten von Heute. Viel Spaß!";
-    const options = {
-      method: "GET",
-      url: "https://api.github.com/users",
-      headers: { "user-agent": "ua", accept: "application/json" }
-    };
+      "Klar, ich habe dir eine E-Mail mit den Neuesten Nachrichten von Heute geschickt. Viel Spaß!";
+    this.response.speak(message).listen(message);
+    this.emit(":responseReady");
+    // const options = {
+    //   method: "GET",
+    //   url: "https://api.github.com/users",
+    //   headers: { "user-agent": "ua", accept: "application/json" }
+    // };
 
-    rq(options, function(error, response, body) {
-      if (error) console.log(error);
-      response.setEncoding("utf8");
-      console.log("-------------------");
-      console.log(JSON.parse(body)[1].login.toString());
-      console.log("-------------------");
-      return JSON.parse(body)[1].login.toString();
-      //   console.log(body);
-    })
-      .then(msg => {
-        const m = JSON.parse(msg)[1].login.toString();
-        console.log("------------------->>>>>");
-        console.log(m);
-        console.log("------------------->>>>");
-        this.response.speak(m).listen(m);
-        this.emit(":responseReady");
-      })
-      .bind(this);
+    // rq(options, function(error, response, body) {
+    //   if (error) console.log(error);
+    //   response.setEncoding("utf8");
+    //   console.log("-------------------");
+    //   console.log(JSON.parse(body)[1].login.toString());
+    //   console.log("-------------------");
+    //   return JSON.parse(body)[1].login.toString();
+    //   //   console.log(body);
+    // })
+    //   .then(msg => {
+    //     const m = JSON.parse(msg)[1].login.toString();
+    //     console.log("------------------->>>>>");
+    //     console.log(m);
+    //     console.log("------------------->>>>");
+    //     this.response.speak(m).listen(m);
+    //     this.emit(":responseReady");
+    //   })
+    //   .bind(this);
   },
   sGetEventsRecommendations: function() {
     const message =
@@ -244,15 +256,15 @@ const speechHandlers = {
         message = config.welcome_message + " ";
         this.attributes["start"] = false;
       }
-      message += "There are no new items. Would you like to hear older items? ";
+      message += "Es gibt keine neue Artikeln. Soll ich ältere artikeln lesen?";
       this.response.speak(message).listen(message);
     } else {
       message =
         this.attributes["category"] +
-        " has no new items. Would you like to hear older items? ";
+        " hat keine Artikel. Willst du ältere Artikeln hören? ";
       const reprompt =
-        "There are no new items in the feed. " +
-        "You can say yes to hear older items and no to select other feeds.";
+        "Es gibt keine neue artikln im feed " +
+        "Du kannst Ja sagen für ältere Artikeln.";
       // change state to NO_NEW_ITEM
       this.handler.state = constants.states.NO_NEW_ITEM;
       this.response.speak(message).listen(reprompt);
@@ -329,7 +341,7 @@ const speechHandlers = {
     message += content;
     if (this.attributes[feedEndedKey]) {
       message +=
-        " You have reached the end of the feed. " +
+        " Es gibt keine andere Artikeln im feed. " +
         constants.breakTime["200"] +
         " You can choose any other category, or restart the feed. ";
       cardContent +=
@@ -339,16 +351,16 @@ const speechHandlers = {
         " You can say, list all feeds, to hear all categories or" +
         " say, restart, to start over the current feed. ";
     } else if (this.attributes[justStartedKey]) {
-      message += "You can say next for more.";
-      cardContent += "You can say next for more.";
+      message += "Du kannst nächste sagen für mehr";
+      cardContent += "Du kannst nächste sagen für mehr";
       reprompt =
         "You can say next for more items. You can also say, list all feeds, to hear all categories. ";
     } else {
-      message += "You can say next for more. ";
-      cardContent += "You can say next for more. ";
+      message += "Du kannst nächste sagen für mehr Artikeln. ";
+      cardContent += "Du kannst nächste sagen für mehr Artikeln. ";
       reprompt =
-        "You can say next for more items, or say previous for previous items. " +
-        "You can also say, list all feeds, to hear all categories. ";
+        "Du kannst nächste sagen für mehr Artikeln., oder zurück für vergangene Artikeln. " +
+        "Du kann auch list feed sagen, um alle Kategorien zu hören. ";
     }
     this.response.cardRenderer(cardTitle, cardContent, null);
     this.response.speak(message).listen(reprompt);
@@ -385,7 +397,7 @@ const speechHandlers = {
           constants.breakTime["200"];
       } else {
         message +=
-          "There are " + this.attributes["feedLength"] + " items in the feed. ";
+          "Es gibt " + this.attributes["feedLength"] + " Artikeln im feed. ";
       }
       this.attributes["newItemCount"] = null;
       // Setting start flag as false
@@ -423,12 +435,12 @@ const speechHandlers = {
     message += content;
     if (this.attributes[feedEndedKey]) {
       message +=
-        " You have reached the end of the feed. " +
+        " Du hast der letzte Artikel erreicht. " +
         constants.breakTime["200"] +
-        " You can say restart to hear the feed from the beginning or say previous to hear newer items. ";
+        " Du kannt neue starten sagen um der feed vom Anfang an hören, sonst kannst du zurück sagen für neue artikel. ";
       cardContent +=
-        "You have reached the end of the feed. " +
-        " You can say restart to hear the feed from the beginning or say previous to hear newer items. ";
+        "Du hast der letzte Artikel erreicht. " +
+        " Du kannt neue starten sagen um der feed vom Anfang an hören, sonst kannst du zurück sagen für neue artikel. ";
       return this.emit(
         ":askWithCard",
         message,
@@ -438,8 +450,8 @@ const speechHandlers = {
         null
       );
     } else {
-      message += "You can say next for more. ";
-      cardContent += "You can say next for more. ";
+      message += "Du kannst nächste sagen für mehr. ";
+      cardContent += "Du kannst nächste sagen für mehr. ";
     }
     this.response.cardRenderer(cardTitle, cardContent, null);
     this.response.speak(message).listen(message);
@@ -514,7 +526,7 @@ const speechHandlers = {
       constants.breakTime["100"] +
       "You can also ask, give details for item 1 to get more information about the item. " +
       constants.breakTime["100"] +
-      "What would you like to do?";
+      "Was willst du machen?";
     this.response.speak(message).listen(message);
 
     this.emit(":responseReady");
@@ -526,7 +538,7 @@ const speechHandlers = {
       " has no new items. " +
       "You can say yes to hear older items and no to select other feeds." +
       constants.breakTime["100"] +
-      "What would you like to do?";
+      "Was willst du machen?";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },
@@ -540,7 +552,7 @@ const speechHandlers = {
   readItemSpeechHelper: function() {
     // Output sorry message to user. Metrics created using cloudwatch logs to see how many users requests are made
     const message =
-      "Sorry, this feature is not available." +
+      "Sorry, Diese funktionalität ist nicht unterstützt." +
       constants.breakTime["250"] +
       "You can continue navigating through the feed by saying next.";
     this.response.speak(message).listen(message);
@@ -549,7 +561,7 @@ const speechHandlers = {
   sendItemSpeechHelper: function() {
     // Output sorry message to user. Metrics created using cloudwatch logs to see how many users requests are made
     const message =
-      "Sorry, this feature is not available." +
+      "Sorry, Diese funktionalität ist nicht unterstützt." +
       constants.breakTime["250"] +
       "You can continue navigating through the feed by saying next.";
     this.response.speak(message).listen(message);
@@ -618,7 +630,7 @@ const speechHandlers = {
       constants.breakTime["100"] +
       "You can also ask, give details for item one to get more information about the item. " +
       constants.breakTime["100"] +
-      "What would you like to do?";
+      "Was willst du machen?";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },
@@ -631,13 +643,13 @@ const speechHandlers = {
       " has no new items. " +
       "You can say yes to hear older items and no to select other feeds." +
       constants.breakTime["100"] +
-      "What would you like to do?";
+      "Was willst du machen?";
     this.response.speak(message).listen(reprompt);
     this.emit(":responseReady");
   },
   unhandledSingleFeedMode: function() {
     const message =
-      "Sorry, you can say next and previous to navigate through the feed. What would you like to do?";
+      "Sorry, Du kannst nächste und zurück sagen zum navigieren. Was willst du machen?";
     this.response.speak(message).listen(message);
     this.emit(":responseReady");
   },

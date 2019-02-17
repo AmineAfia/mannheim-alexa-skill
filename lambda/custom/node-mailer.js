@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 const aws = require("aws-sdk");
 aws.config.update({ region: "us-east-1" });
 const ses = new aws.SES();
+
 const params = {
   Destination: {
     BccAddresses: [],
@@ -12,8 +13,7 @@ const params = {
     Body: {
       Html: {
         Charset: "UTF-8",
-        Data:
-          'This message body contains HTML formatting. It can, for example, contain links like this one: <a class="ulink" href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide" target="_blank">Amazon SES Developer Guide</a>.'
+        Data: "<html><head><title>Your Digest</title></head><body><div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'><h2><center>Ads</center></h2></div><div style='width: 90%; background-color: #E1E1E1'><ul><li><a href='test0'>mannheimer morgen artikel 1</a></li><li><a href='test0'>mannheimer morgen artikel 2</a></li><li><a href='test0'>mannheimer morgen artikel 3</a></li><li><a href='test0'>mannheimer morgen artikel 4</a></li></ul></div><div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'><h2><center>Ads</center></h2></div> </body></html>"
       },
       Text: {
         Charset: "UTF-8",

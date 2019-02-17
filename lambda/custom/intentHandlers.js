@@ -17,6 +17,19 @@ const s3Params = {
 let items = [];
 
 let intentHandlers = {
+  getStoredArticles: function() {
+    s3.getObject(
+      s3Params,
+      function(err, data) {
+        if (err) console.log(err, err.stack);
+        // an error occurred
+        else {
+          let articles = JSON.parse(data.Body);
+          this.emit("sReadStoredFeed", articles.slice(1, 5));
+        }
+      }.bind(this)
+    );
+  },
   getWordOccurences: function(searchWord) {
     s3.getObject(
       s3Params,
@@ -33,9 +46,9 @@ let intentHandlers = {
               return map;
             }, Object.create(null));
           console.log("------------------");
-          console.log(counts[searchWord]); // successful response
+          console.log(counts["Mannheim"]); // successful response
           console.log("------------------");
-          this.emit("sCountWordOccurences", counts[searchWord]);
+          this.emit("sCountWordOccurences", counts["Mannheimer"]);
         }
       }.bind(this)
     );

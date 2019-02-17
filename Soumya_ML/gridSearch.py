@@ -19,7 +19,7 @@ __author__ = "Marius Bock, Hendrik Roeder, Jasmin Weimueller"
 pd.set_option('display.max_columns', None)
 
 # NOTE: Adjust relative file path to your file system
-bankingcalldata = pd.read_csv('bank-additional-full.csv', sep=';')
+# bankingcalldata = pd.read_csv('bank-additional-full.csv', sep=';')
 
 print('Full dataset shape: ')
 print(bankingcalldata.shape)

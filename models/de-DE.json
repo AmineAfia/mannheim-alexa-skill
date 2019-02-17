@@ -4,6 +4,11 @@
       "invocationName": "mannheim",
       "intents": [
         {
+          "name": "GetStoredArticles",
+          "samples": ["artikel", "kannst du mir mein feed lesen"],
+          "slots": []
+        },
+        {
           "name": "GetWordOccurences",
           "samples": [
             "amine",

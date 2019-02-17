@@ -70,10 +70,10 @@ const stateHandlers = {
         this.emit("helpStartMode");
       },
       "AMAZON.StopIntent": function() {
-        this.emit("EndSession", "Goodbye");
+        this.emit("EndSession", "Auf wiedersehen");
       },
       "AMAZON.CancelIntent": function() {
-        this.emit("EndSession", "Goodbye");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       SessionEndedRequest: function() {
         this.emit("EndSession", constants.terminate);
@@ -163,10 +163,10 @@ const stateHandlers = {
       this.emit("helpFeedMode");
     },
     "AMAZON.StopIntent": function() {
-      this.emit("EndSession", "Good bye .");
+      this.emit("EndSession", "Auf wiedersehen .");
     },
     "AMAZON.CancelIntent": function() {
-      this.emit("EndSession", "Good bye .");
+      this.emit("EndSession", "Auf wiedersehen .");
     },
     SessionEndedRequest: function() {
       this.emit("EndSession", constants.terminate);
@@ -190,7 +190,8 @@ const stateHandlers = {
       "AMAZON.YesIntent": function() {
         this.handler.state = constants.states.FEED_MODE;
         this.attributes["newItemCount"] = null;
-        this.emit("readItems");
+        // this.emit("readItems");
+        this.emit("getStoredArticles");
       },
       "AMAZON.NoIntent": function() {
         this.handler.state = constants.states.START_MODE;
@@ -201,10 +202,10 @@ const stateHandlers = {
         this.emit("helpNoNewItemMode");
       },
       "AMAZON.StopIntent": function() {
-        this.emit("EndSession", "Good bye .");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       "AMAZON.CancelIntent": function() {
-        this.emit("EndSession", "Good bye .");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       SessionEndedRequest: function() {
         this.emit("EndSession", constants.terminate);
@@ -227,6 +228,9 @@ const stateHandlers = {
       },
       GetEventsRecommendations: function() {
         this.emit("getEventsRecommendations");
+      },
+      GetStoredArticles: function() {
+        this.emit("getStoredArticles");
       }
     }
   ),
@@ -247,20 +251,21 @@ const stateHandlers = {
       },
       "AMAZON.YesIntent": function() {
         this.attributes["newItemCount"] = null;
-        this.emit("readItems");
+        // this.emit("readItems");
+        this.emit("getStoredArticles");
       },
       "AMAZON.NoIntent": function() {
         this.attributes["newItemCount"] = null;
-        this.emit("EndSession", "Good bye .");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       "AMAZON.HelpIntent": function() {
         this.emit("helpSingleFeedMode");
       },
       "AMAZON.StopIntent": function() {
-        this.emit("EndSession", "Good bye .");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       "AMAZON.CancelIntent": function() {
-        this.emit("EndSession", "Good bye .");
+        this.emit("EndSession", "Auf wiedersehen .");
       },
       SessionEndedRequest: function() {
         this.emit("EndSession", constants.terminate);
@@ -279,6 +284,9 @@ const stateHandlers = {
       },
       GetEventsRecommendations: function() {
         this.emit("getEventsRecommendations");
+      },
+      GetStoredArticles: function() {
+        this.emit("getStoredArticles");
       }
     }
   )
