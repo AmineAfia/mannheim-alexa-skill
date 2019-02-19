@@ -11,8 +11,8 @@
         {
           "name": "GetWordOccurences",
           "samples": [
-            "amine",
-            "wie viel mals wurde amine in Nachrichten genannt"
+            "Mannheimer Morgen",
+            "wie viel mals wurde Mannheimer Morgen in Nachrichten genannt"
           ],
           "slots": []
         },
@@ -23,12 +23,12 @@
         },
         {
           "name": "SendDigest",
-          "samples": ["email", "Kannst du mir my digest schicken"],
+          "samples": ["email", "Ich habe kein Zeit schick mir ein email", "Kannst du mir my digest schicken"],
           "slots": []
         },
         {
           "name": "GetEventsRecommendations",
-          "samples": ["evt", "Was passiert is mannheim nächste wochenende"],
+          "samples": ["evt", "Was passiert in mannheim diese wochenende"],
           "slots": []
         },
         {

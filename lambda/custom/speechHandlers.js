@@ -13,7 +13,7 @@ const speechHandlers = {
     let cardTitle = config.welcome_message;
     let cardContent =
       config.welcome_message + "Du kannst ein diese feeds auswählen :  \n";
-    // Call category helper to get list of all categories
+    // Call category helper to get liWilkommenst of all categories
     categoryHelper((categoryList, cardCategoryList) => {
       message += categoryList;
       reprompt += categoryList;
@@ -256,7 +256,7 @@ const speechHandlers = {
         message = config.welcome_message + " ";
         this.attributes["start"] = false;
       }
-      message += "Es gibt keine neue Artikeln. Soll ich ältere artikeln lesen?";
+      message += "Fragen Sie mich für Nachrichten oder über Mannheim. Und übrigens, Es gibt keine Neue Artikln in Ihre Feed!";
       this.response.speak(message).listen(message);
     } else {
       message =

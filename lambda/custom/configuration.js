@@ -2,7 +2,7 @@ let config = {
   // TODO Add Application ID
   appId: "amzn1.ask.skill.c7458e75-997a-443d-9f7e-302bfb5ab862",
   // TODO Add an appropriate welcome message.
-  welcome_message: "Wilkommen bei Mannheim eine Skill von Mannheimer Morgen",
+  welcome_message: "Wilkommen bei Mannheim. Eine Skill von Mannheimer Morgen. ",
 
   number_feeds_per_prompt: 3,
   speak_only_feed_title: true,

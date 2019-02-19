@@ -123,8 +123,7 @@ def predict():
 	print(y_full_cat)
 
 	# perform 80/20 train-test-split for each
-	X_train_l, X_test_l, y_train_l, y_test_l = train_test_split(X_preprocessed_label, y_full_cat,
-	                                                            test_size=0.20, random_state=42, stratify=y_full_cat)
+	X_train_l, X_test_l, y_train_l, y_test_l = train_test_split(X_preprocessed_label, y_full_cat,test_size=0.20, random_state=42, stratify=y_full_cat)
 
 
 	print()

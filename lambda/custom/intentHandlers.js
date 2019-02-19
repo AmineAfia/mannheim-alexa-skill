@@ -63,7 +63,7 @@ let intentHandlers = {
           let articles = data.Body.toString("utf-8");
           let wordsCounts = articles.split(" ").length;
           let pages = wordsCounts / 500;
-          let trees = pages / 12144;
+          let trees = (pages / 12144).toFixed(4);
           console.log("------------------");
           console.log(wordsCounts); // successful response
           console.log("------------------");

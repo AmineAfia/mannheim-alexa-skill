@@ -57,12 +57,10 @@ def grid_search(model, features, target, positive_label, parameters, fit_params,
         model_scorer = make_scorer(accuracy_score)
         scoring = "accuracy"
     cross_validation = StratifiedKFold(n_splits=k, shuffle=True, random_state=10)
-    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer, verbose=5,
-                                         cv=cross_validation, fit_params=fit_params)
+    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer, verbose=5,cv=cross_validation, fit_params=fit_params)
     grid_search_estimator.fit(features, target)
 
-    print("best " + scoring + " is {} with params {}".format(grid_search_estimator.best_score_,
-                                                      grid_search_estimator.best_params_))
+    print("best " + scoring + " is {} with params {}".format(grid_search_estimator.best_score_, grid_search_estimator.best_params_))
     results = grid_search_estimator.cv_results_
     for i in range(len(results['params'])):
         print("{}, {}".format(results['params'][i], results['mean_test_score'][i]))
@@ -88,16 +86,14 @@ def grid_search_model(model, features, target, positive_label, parameters, fit_p
         scoring = "accuracy"
     print('grid search started with ' + str(k) + ' folds')
     cross_validation = StratifiedKFold(n_splits=k, shuffle=True, random_state=10)
-    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer,
-                                         cv=cross_validation, fit_params=fit_params, verbose=2, n_jobs= -1)
+    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer,cv=cross_validation, fit_params=fit_params, verbose=2, n_jobs= -1)
     grid_search_estimator.fit(features, target)
 
     results = grid_search_estimator.cv_results_
     for i in range(len(results['params'])):
         print("{}, {}".format(results['params'][i], results['mean_test_score'][i]))
 
-    print("best " + scoring + " is {} with params {}".format(grid_search_estimator.best_score_,
-                                                      grid_search_estimator.best_params_))
+    print("best " + scoring + " is {} with params {}".format(grid_search_estimator.best_score_,grid_search_estimator.best_params_))
 
     return grid_search_estimator.best_estimator_
 
@@ -140,16 +136,14 @@ def grid_search_cost_model(model, features, target, parameters, fit_params, fold
     model_scorer = make_scorer(profit_score_function, greater_is_better=True)
     print('grid search started with ' + str(k) + ' folds')
     cross_validation = StratifiedKFold(n_splits=k, shuffle=True, random_state=10)
-    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer,
-                                         cv=cross_validation, fit_params=fit_params, verbose=2)
+    grid_search_estimator = GridSearchCV(model, parameters, scoring=model_scorer,cv=cross_validation, fit_params=fit_params, verbose=2)
     grid_search_estimator.fit(features, target)
 
     results = grid_search_estimator.cv_results_
     for i in range(len(results['params'])):
         print("{}, {}".format(results['params'][i], results['mean_test_score'][i]))
 
-    print("best profit is {} with params {} ".format(grid_search_estimator.best_score_,
-                                                      grid_search_estimator.best_params_))
+    print("best profit is {} with params {} ".format(grid_search_estimator.best_score_, grid_search_estimator.best_params_))
 
     return grid_search_estimator.best_estimator_
 
@@ -164,15 +158,13 @@ def grid_search_cost_params(model, features, target, parameters, fit_params, fol
     k = folds
     print('grid search started with ' + str(k) + ' folds')
     cross_validation = StratifiedKFold(n_splits=k, shuffle=True, random_state=10)
-    grid_search_estimator = GridSearchCV(model, parameters, scoring=get_profit_scorer(),
-                                         cv=cross_validation, fit_params=fit_params, verbose=2)
+    grid_search_estimator = GridSearchCV(model, parameters, scoring=get_profit_scorer(), cv=cross_validation, fit_params=fit_params, verbose=2)
     grid_search_estimator.fit(features, target)
 
     results = grid_search_estimator.cv_results_
     for i in range(len(results['params'])):
         print("{}, {}".format(results['params'][i], results['mean_test_score'][i]))
 
-    print("best profit is {} with params {} ".format(grid_search_estimator.best_score_,
-                                                      grid_search_estimator.best_params_))
+    print("best profit is {} with params {} ".format(grid_search_estimator.best_score_,grid_search_estimator.best_params_))
 
     return grid_search_estimator.best_params_

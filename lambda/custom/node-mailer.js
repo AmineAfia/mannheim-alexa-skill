@@ -13,7 +13,7 @@ const params = {
     Body: {
       Html: {
         Charset: "UTF-8",
-        Data: "<html><head><title>Your Digest</title></head><body><div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'><h2><center>Ads</center></h2></div><div style='width: 90%; background-color: #E1E1E1'><ul><li><a href='test0'>mannheimer morgen artikel 1</a></li><li><a href='test0'>mannheimer morgen artikel 2</a></li><li><a href='test0'>mannheimer morgen artikel 3</a></li><li><a href='test0'>mannheimer morgen artikel 4</a></li></ul></div><div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'><h2><center>Ads</center></h2></div> </body></html>"
+        Data: "<html><head> <title>Your Digest</title> </head> <body> <div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'> <h2> <center>Ads goes here</center> <center></center> </h2> </div><div style='width: 90%; background-color: #E1E1E1'> <br><h2><center>Your digest</center></h2> <ul> <li><a href='test'>Alles dreht sich ums Hacken im Mafinex.</a></li><li><a href='test'>Mannheim: Schrotthändler überfallen und verletzt - Polizei stoppt Verdächtige in zwei Lastwagen</a></li><li><a href='test'>Kunstraub sorgt für Spannung und Heiterkeit </a></li><li><a href='https://www.morgenweb.de/mannheimer-morgen_artikel,-mannheim-sparkasse-eigenes-cafe-_arid,1402308.html'>Sparkasse: eigenes Café</a></li></ul> <br></div><div id='rectangle' style='width: 90%; height: 100px; background-color: #ADC3E5'> <h2> <center>Ads goes here</center> </h2> </div></body></html>"
       },
       Text: {
         Charset: "UTF-8",
