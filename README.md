@@ -15,3 +15,8 @@ skill.json      Infos that get shown about the app amazon store + apis definitio
 # ask CLI
 
 The skeleton of the skill was generated and deployed using ask CLI. [link](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
+
+# Conversation example
+
+![part1](./screenshots/1.png)
+![part2](./screenshots/2.png)
